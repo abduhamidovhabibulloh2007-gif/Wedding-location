@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    const button = document.getElementById('loc-btn');
+    const status = document.getElementById('status');
+
+    button.addEventListener('click', () => {
+        if (!navigator.geolocation) {
+            status.textContent = 'Brauzeringiz joylashuvni qo\'llab-quvvatlamaydi.';
+            return;
+        }
+
+        status.textContent = 'Aniqlanyapti...';
+        navigator.geolocation.getCurrentPosition((position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            status.textContent = `Joylashuvingiz olindi: Kenglik ${latitude}, Uzunlik ${longitude}. Rahmat!`;
+        }, () => {
+            status.textContent = 'Joylashuvni aniqlashning iloji bo\'lmadi.';
+        });
+    });
+</script>
